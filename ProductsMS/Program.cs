@@ -1,41 +1,92 @@
+using MediatR;
+using MassTransit;
+using System.Configuration;
+using System.Security.Claims;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using ProductMS.Application.Handlers.Commands;
+using ProductMS.Core.DataBase;
+using ProductMS.Core.Repositories;
+using ProductMS.Core.Service;
+using ProductMS.Infrastructure.DataBase;
+using ProductMS.Infrastructure.Repositories;
+using ProductMS.Infrastructure.Setings;
+using ProductMS.Infrastructure.Messaging.Consumers;
+using ProductMS.Infrastructure.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var _appSettings = new AppSettings();
+var appSettingsSection = builder.Configuration.GetSection("AppSettings");
+_appSettings = appSettingsSection.Get<AppSettings>();
+builder.Services.Configure<AppSettings>(appSettingsSection);
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+    });
+
+builder.Services.AddHttpClient();
+
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateProductCommandHandler).Assembly));
+
+builder.Services.AddScoped<IEventPublisher, EventPublisher>();
+builder.Services.AddTransient<IProductsDbContext, ProductsDbContext>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IProductsDbContext, ProductsDbContext>();
+
+builder.Services.AddSingleton<MongoDbContext>();
+builder.Services.AddSingleton(provider => 
+{ 
+    var context = provider.GetRequiredService<MongoDbContext>(); 
+    return context.Products; 
+});
+
+var dbConnectionString = builder.Configuration.GetValue<string>("DefaultConnection");
+builder.Services.AddDbContext<ProductsDbContext>(options => options.UseSqlServer(dbConnectionString));
+builder.Services.AddSingleton<MongoDbContext>();
+
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<ProductCreatedConsumer>();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h => {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        cfg.ReceiveEndpoint("product-created-queue", e =>
+        {
+            e.ConfigureConsumer<ProductCreatedConsumer>(context);
+        });
+    });
+});
+
+
+builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
-
+app.UseAuthentication(); 
+app.UseAuthorization();  
+app.MapControllers();
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
