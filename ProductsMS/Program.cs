@@ -39,6 +39,7 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateProductCommandHandler).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(UpdateProductCommandHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DeleteProductCommandHandler).Assembly));
 
 
 builder.Services.AddScoped<IEventPublisher, EventPublisher>();
@@ -60,10 +61,13 @@ builder.Services.AddSingleton<MongoDbContext>();
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<ProductCreatedConsumer>();
+    x.AddConsumer<ProductUpdatedConsumer>();
+    x.AddConsumer<ProductDeletedConsumer>();
 
     x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host("localhost", "/", h => {
+        cfg.Host("localhost", "/", h =>
+        {
             h.Username("guest");
             h.Password("guest");
         });
@@ -75,6 +79,10 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint("product-updated-queue", e =>
         {
             e.ConfigureConsumer<ProductUpdatedConsumer>(context);
+        });
+        cfg.ReceiveEndpoint("product-deleted-queue", e =>
+        {
+            e.ConfigureConsumer<ProductDeletedConsumer>(context);
         });
     });
 });

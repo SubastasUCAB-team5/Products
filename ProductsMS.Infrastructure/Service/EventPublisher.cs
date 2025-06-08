@@ -51,6 +51,21 @@ namespace ProductMS.Infrastructure.Service
 
             await _publishEndpoint.Publish(@event);
         }
+        public async Task PublishProductDeletedAsync(Product product)
+        {
+            var @event = new ProductDeletedEvent
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                BasePrice = product.BasePrice,
+                Category = product.Category,
+                Images = product.Images,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            await _publishEndpoint.Publish(@event);
+        }
     }
 }
 
