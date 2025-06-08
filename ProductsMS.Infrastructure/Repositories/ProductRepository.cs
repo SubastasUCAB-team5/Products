@@ -45,6 +45,20 @@ namespace ProductMS.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<Product?> GetByIdAsync(Guid productId)
+        {
+            return await _dbContext.Products.FirstOrDefaultAsync(u => u.Id == productId);
+        }
+
+        public async Task<Product?> GetByCategoryAsync(string category)
+        {
+            return await _dbContext.Products.FirstOrDefaultAsync(u => u.Category == category);
+        }
+
+        public async Task<List<Product>> GetAllAsync()
+        {
+            return await _dbContext.Products.ToListAsync();
+        }
     }
 
 }

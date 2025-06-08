@@ -10,6 +10,7 @@ namespace ProductMS.Core.Service
     public interface IEventPublisher
     {
         Task PublishProductCreatedAsync(Product product);
+        Task PublishProductUpdatedAsync(Product product);
 
     }
 }

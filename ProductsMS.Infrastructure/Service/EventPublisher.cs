@@ -35,7 +35,22 @@ namespace ProductMS.Infrastructure.Service
 
             await _publishEndpoint.Publish(@event);
         }
+        public async Task PublishProductUpdatedAsync(Product product)
+        {
+            var @event = new ProductUpdatedEvent
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                BasePrice = product.BasePrice,
+                Category = product.Category,
+                Images = product.Images,
+                State = product.State,
+                CreatedAt = product.UpdatedAt ?? product.CreatedAt
+            };
 
+            await _publishEndpoint.Publish(@event);
+        }
     }
 }
 

@@ -37,6 +37,22 @@ namespace ProductMS.Controllers
             }
         }
 
+        [HttpPut("update-product")]
+        public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
+        {
+            try
+            {
+                var command = new UpdateProductCommand(updateProductDto);
+                var msg = await _mediator.Send(command);
+                return Ok(msg);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error updating product: {Message}", e.Message);
+                return StatusCode(500, "Error while updating product.");
+            }
+        }
+
 
 
 

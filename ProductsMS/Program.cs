@@ -38,6 +38,8 @@ builder.Services.AddHttpClient();
 
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateProductCommandHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(UpdateProductCommandHandler).Assembly));
+
 
 builder.Services.AddScoped<IEventPublisher, EventPublisher>();
 builder.Services.AddTransient<IProductsDbContext, ProductsDbContext>();
@@ -69,6 +71,10 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint("product-created-queue", e =>
         {
             e.ConfigureConsumer<ProductCreatedConsumer>(context);
+        });
+        cfg.ReceiveEndpoint("product-updated-queue", e =>
+        {
+            e.ConfigureConsumer<ProductUpdatedConsumer>(context);
         });
     });
 });
