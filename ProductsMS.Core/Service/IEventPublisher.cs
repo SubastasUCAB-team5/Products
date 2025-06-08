@@ -11,6 +11,7 @@ namespace ProductMS.Core.Service
     {
         Task PublishProductCreatedAsync(Product product);
         Task PublishProductUpdatedAsync(Product product);
+        Task PublishProductDeletedAsync(Product product);
 
     }
 }

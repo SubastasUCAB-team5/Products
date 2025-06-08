@@ -53,9 +53,20 @@ namespace ProductMS.Controllers
             }
         }
 
-
-
-
-
+        [HttpDelete("delete-{id}")]
+        public async Task<IActionResult> DeleteProductById(Guid id)
+        {
+            try
+            {
+                var command = new DeleteProductCommand(new DeleteProductDto { ProductId = id });
+                var message = await _mediator.Send(command);
+                return Ok(message);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error deleting product: {Message}", e.Message);
+                return StatusCode(500, "Error while deleting product.");
+            }
+        }
     }
 }
