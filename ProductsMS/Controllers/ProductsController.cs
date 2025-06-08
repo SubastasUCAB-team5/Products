@@ -103,6 +103,3 @@ namespace ProductMS.Controllers
         }
     }
 }
-git add .
-git commit -m "feat(product): UC3114 consult product endpoint"
-git push -u origin feature/UC3114-consult-product
