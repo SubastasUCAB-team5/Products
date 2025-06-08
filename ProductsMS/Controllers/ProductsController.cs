@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using ProductMS.Commons.Dtos.Request;
 using ProductMS.Application.Commands;
+using ProductMS.Application.Queries;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ProductMS.Controllers
@@ -68,5 +69,40 @@ namespace ProductMS.Controllers
                 return StatusCode(500, "Error while deleting product.");
             }
         }
+
+        [HttpGet("get-all")]
+        public async Task<IActionResult> GetAllProducts()
+        {
+            try
+            {
+                var query = new GetAllProductsQuery();
+                var products = await _mediator.Send(query);
+                return Ok(products);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error getting products: {Message}", e.Message);
+                return StatusCode(500, "Error while getting products.");
+            }
+        }
+        
+        [HttpGet("get-{id}")]
+        public async Task<IActionResult> GetProduct(Guid id)
+        {
+            try
+            {
+                var query = new GetProductQuery(id);
+                var product = await _mediator.Send(query);
+                return Ok(product);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error getting product: {Message}", e.Message);
+                return StatusCode(500, "Error while getting product.");
+            }
+        }
     }
 }
+git add .
+git commit -m "feat(product): UC3114 consult product endpoint"
+git push -u origin feature/UC3114-consult-product
