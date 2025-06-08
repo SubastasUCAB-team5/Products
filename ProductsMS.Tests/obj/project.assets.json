@@ -949,11 +949,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cesar\\Desktop\\Desarrollo\\ProductsMS\\Products\\ProductsMS.Tests\\ProductsMS.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Tests\\ProductsMS.Tests.csproj",
       "projectName": "ProductsMS.Tests",
-      "projectPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\ProductsMS\\Products\\ProductsMS.Tests\\ProductsMS.Tests.csproj",
+      "projectPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Tests\\ProductsMS.Tests.csproj",
       "packagesPath": "C:\\Users\\cesar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\ProductsMS\\Products\\ProductsMS.Tests\\obj\\",
+      "outputPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
