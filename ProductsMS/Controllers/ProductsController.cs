@@ -85,7 +85,7 @@ namespace ProductMS.Controllers
                 return StatusCode(500, "Error while getting products.");
             }
         }
-        
+
         [HttpGet("get-{id}")]
         public async Task<IActionResult> GetProduct(Guid id)
         {
@@ -99,6 +99,26 @@ namespace ProductMS.Controllers
             {
                 _logger.LogError(e, "Error getting product: {Message}", e.Message);
                 return StatusCode(500, "Error while getting product.");
+            }
+        }
+
+        [HttpPut("change-state")]
+        public async Task<IActionResult> ChangeState(ChangeProductStateDto dto)
+        {
+            try
+            {
+                var command = new ChangeProductStateCommand(dto);
+                var result = await _mediator.Send(command);
+                return Ok(new { Message = result });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, new { Error = "Ocurri� un error interno al procesar la solicitud" });
             }
         }
     }
