@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "MnsEwwOgirE=",
+  "dgSpecHash": "I/ejy8WCV4Q=",
   "success": true,
-  "projectFilePath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\ProductsMS\\Products\\ProductsMS.Commons\\ProductsMS.Commons.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Commons\\ProductsMS.Commons.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cesar\\.nuget\\packages\\mongodb.bson\\3.4.0\\mongodb.bson.3.4.0.nupkg.sha512",
+    "C:\\Users\\cesar\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\cesar\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

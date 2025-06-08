@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cesar\\Desktop\\Desarrollo\\ProductsMS\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj": {}
+    "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cesar\\Desktop\\Desarrollo\\ProductsMS\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj": {
+    "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cesar\\Desktop\\Desarrollo\\ProductsMS\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj",
         "projectName": "ProductsMS.Domain",
-        "projectPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\ProductsMS\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj",
+        "projectPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj",
         "packagesPath": "C:\\Users\\cesar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\ProductsMS\\Products\\ProductsMS.Domain\\obj\\",
+        "outputPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,6 +49,12 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[3.4.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
