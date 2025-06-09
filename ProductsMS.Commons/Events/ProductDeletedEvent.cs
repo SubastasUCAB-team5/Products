@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using ProductMS.Domain.Entities;
 
 namespace ProductMS.Commons.Events
 {
@@ -11,5 +13,6 @@ namespace ProductMS.Commons.Events
         public string Category { get; set; } = default!;
         public List<string> Images { get; set; } = new List<string>();
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public Guid UserId { get; set; }
     }
 }

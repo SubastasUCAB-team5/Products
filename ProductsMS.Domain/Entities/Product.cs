@@ -27,10 +27,11 @@ namespace ProductMS.Domain.Entities
         public string Category { get; set; } = default!;
         public List<string> Images { get; set; } = new List<string>();
         public ProductState State { get; set; } = ProductState.Draft;
+        public Guid UserId { get; set; } = default!;
         
         protected Product() { }
 
-        public Product(string name, string description, string basePrice, string category, List<string> images, ProductState state = ProductState.Draft)
+        public Product(string name, string description, string basePrice, string category, List<string> images, Guid userId, ProductState state = ProductState.Draft)
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -39,16 +40,18 @@ namespace ProductMS.Domain.Entities
             Category = category;
             Images = images ?? new List<string>();
             State = state;
+            UserId = userId;
             CreatedAt = DateTime.UtcNow;
         }
 
-        public void Update(string name, string description, string basePrice, string category, List<string> images)
+        public void Update(string name, string description, string basePrice, string category, List<string> images, Guid userId)
         {
             if (ProductStateTransitions.IsImmutable(State))
             {
                 throw new InvalidOperationException($"No se puede modificar un producto en estado {State}");
             }
 
+            UserId = userId;
             Name = name;
             Description = description;
             BasePrice = basePrice;

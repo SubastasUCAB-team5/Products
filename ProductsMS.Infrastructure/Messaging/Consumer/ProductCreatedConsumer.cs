@@ -27,7 +27,8 @@ public class ProductCreatedConsumer : IConsumer<ProductCreatedEvent>
             Category = message.Category,
             Images = message.Images,
             State = message.State,
-            CreatedAt = message.CreatedAt
+            CreatedAt = message.CreatedAt,
+            UserId = message.UserId
         };
 
         await _mongo.Products.InsertOneAsync(product);

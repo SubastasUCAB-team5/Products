@@ -30,7 +30,8 @@ namespace ProductMS.Infrastructure.Service
                 Category = product.Category,
                 Images = product.Images,
                 State = product.State,
-                CreatedAt = product.CreatedAt
+                CreatedAt = product.CreatedAt,
+                UserId = product.UserId
             };
 
             await _publishEndpoint.Publish(@event);
@@ -46,7 +47,8 @@ namespace ProductMS.Infrastructure.Service
                 Category = product.Category,
                 Images = product.Images,
                 State = product.State,
-                CreatedAt = product.UpdatedAt ?? product.CreatedAt
+                CreatedAt = product.UpdatedAt ?? product.CreatedAt,
+                UserId = product.UserId
             };
 
             await _publishEndpoint.Publish(@event);
@@ -61,7 +63,8 @@ namespace ProductMS.Infrastructure.Service
                 BasePrice = product.BasePrice,
                 Category = product.Category,
                 Images = product.Images,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                UserId = product.UserId
             };
 
             await _publishEndpoint.Publish(@event);

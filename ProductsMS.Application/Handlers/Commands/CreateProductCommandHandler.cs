@@ -31,6 +31,7 @@ namespace ProductMS.Application.Handlers.Commands
                 dto.BasePrice,
                 dto.Category!,
                 dto.Images,
+                dto.UserId,
                 dto.State
             )
             {

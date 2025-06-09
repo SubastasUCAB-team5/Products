@@ -27,7 +27,8 @@ public class ProductUpdatedConsumer : IConsumer<ProductUpdatedEvent>
             .Set(u => u.Category, message.Category)
             .Set(u => u.Images, message.Images)
             .Set(u => u.State, message.State)
-            .Set(u => u.CreatedAt, message.CreatedAt);
+            .Set(u => u.CreatedAt, message.CreatedAt)
+            .Set(u => u.UserId, message.UserId);
 
 
         await _mongo.Products.UpdateOneAsync(filter, update);

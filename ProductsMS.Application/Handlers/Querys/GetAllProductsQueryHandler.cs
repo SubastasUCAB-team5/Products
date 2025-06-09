@@ -35,7 +35,7 @@ namespace ProductMS.Application.Handlers.Queries
                 Images = product.Images,
                 State = product.State,
                 CreatedAt = product.CreatedAt,
-                CreatedBy = "system"
+                UserId = product.UserId
             }).ToList();
         }
     }
