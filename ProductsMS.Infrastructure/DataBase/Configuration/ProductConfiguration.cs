@@ -21,6 +21,7 @@ namespace ProductMS.Infrastructure.DataBase.Configuration
             builder.Property(s => s.Images).IsRequired();
             builder.Property(s => s.State).IsRequired().HasConversion<string>();
             builder.Property(s => s.CreatedAt).IsRequired();
+            builder.Property(s => s.UserId).IsRequired();
         }
     }
 

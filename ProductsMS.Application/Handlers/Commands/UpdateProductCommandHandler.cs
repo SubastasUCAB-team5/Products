@@ -29,7 +29,8 @@ namespace ProductMS.Application.Handlers.Commands
             if (!string.IsNullOrEmpty(request.UpdateProductDto.Category)) product.Category = request.UpdateProductDto.Category;
             if (request.UpdateProductDto.Images?.Count > 0) product.Images = request.UpdateProductDto.Images;
             if (request.UpdateProductDto.State.HasValue) product.State = request.UpdateProductDto.State.Value;
-
+            product.UserId = request.UpdateProductDto.UserId;
+            
             await _productRepository.UpdateAsync(product);
             await _eventPublisher.PublishProductUpdatedAsync(product);
             return "Product updated successfully.";

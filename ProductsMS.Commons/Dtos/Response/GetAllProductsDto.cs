@@ -18,7 +18,7 @@ namespace ProductMS.Commons.Dtos.Response
         public List<string> Images { get; set; } = new List<string>();
         public ProductState State { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string? CreatedBy { get; set; }
+        public Guid UserId { get; set; }
     }
 }
 

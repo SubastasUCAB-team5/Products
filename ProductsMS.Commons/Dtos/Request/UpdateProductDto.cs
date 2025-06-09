@@ -17,5 +17,6 @@ namespace ProductMS.Commons.Dtos.Request
         public string Category { get; set; } = default!;
         public List<string> Images { get; set; } = new List<string>();
         public ProductState? State { get; set; }
+        public Guid UserId { get; set; }
     }
 }
