@@ -7,6 +7,7 @@ using MassTransit;
 using ProductMS.Domain.Entities;
 using ProductMS.Commons.Events;
 using ProductMS.Core.Service;
+using Contracts.Events;
 
 namespace ProductMS.Infrastructure.Service
 {
@@ -68,6 +69,12 @@ namespace ProductMS.Infrastructure.Service
             };
 
             await _publishEndpoint.Publish(@event);
+        }
+        public async Task PublishAuctionProductsAsync(AuctionProductsEvent auctionProductsEvent)
+        {
+            Console.WriteLine($"[PublishAuctionProductsAsync] Publicando evento AuctionProductsEvent para AuctionId: {auctionProductsEvent.AuctionId} con {auctionProductsEvent.Products?.Count ?? 0} productos. Timestamp: {auctionProductsEvent.Timestamp}");
+            await _publishEndpoint.Publish(auctionProductsEvent);
+            Console.WriteLine($"[PublishAuctionProductsAsync] Evento AuctionProductsEvent publicado para AuctionId: {auctionProductsEvent.AuctionId}");
         }
     }
 }

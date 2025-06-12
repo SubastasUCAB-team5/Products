@@ -12,9 +12,10 @@ namespace ProductMS.Core.Repositories
         Task AddAsync(Product user);
         Task DeleteAsync(Guid userId);
         Task UpdateAsync(Product user);
-
+        Task UpdateProductsStateAsync(List<string> productIds, ProductState state);
         Task<Product?> GetByIdAsync(Guid userId);
         Task<Product?> GetByCategoryAsync(string email);
         Task<List<Product>> GetAllAsync();
+        
     }
 }

@@ -45,6 +45,20 @@ namespace ProductMS.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task UpdateProductsStateAsync(List<string> productIds, ProductState state)
+        {
+            var products = await _dbContext.Products.Where(p => productIds.Contains(p.Id.ToString())).ToListAsync();
+            if (products == null || !products.Any())
+            {
+                throw new Exception("Products not found.");
+            }
+            foreach (var product in products)
+            {
+                product.State = state;
+            }
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<Product?> GetByIdAsync(Guid productId)
         {
             return await _dbContext.Products.FirstOrDefaultAsync(u => u.Id == productId);

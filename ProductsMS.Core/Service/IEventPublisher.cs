@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProductMS.Domain.Entities;
+using ProductMS.Commons.Events;
 
 namespace ProductMS.Core.Service
 {
@@ -12,6 +13,5 @@ namespace ProductMS.Core.Service
         Task PublishProductCreatedAsync(Product product);
         Task PublishProductUpdatedAsync(Product product);
         Task PublishProductDeletedAsync(Product product);
-
     }
 }
