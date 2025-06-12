@@ -45,6 +45,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Chang
 
 
 builder.Services.AddScoped<IEventPublisher, EventPublisher>();
+builder.Services.AddScoped<AuctionProductsConsumer>();
 builder.Services.AddTransient<IProductsDbContext, ProductsDbContext>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IProductsDbContext, ProductsDbContext>();
@@ -65,6 +66,7 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer<ProductCreatedConsumer>();
     x.AddConsumer<ProductUpdatedConsumer>();
     x.AddConsumer<ProductDeletedConsumer>();
+    x.AddConsumer<AuctionProductsConsumer>();
 
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -74,6 +76,11 @@ builder.Services.AddMassTransit(x =>
             h.Password("guest");
         });
 
+        cfg.ConfigureJsonSerializerOptions(options =>
+        {
+            options.PropertyNameCaseInsensitive = true;
+            return options;
+        });
         cfg.ReceiveEndpoint("product-created-queue", e =>
         {
             e.ConfigureConsumer<ProductCreatedConsumer>(context);
@@ -85,6 +92,10 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint("product-deleted-queue", e =>
         {
             e.ConfigureConsumer<ProductDeletedConsumer>(context);
+        });
+        cfg.ReceiveEndpoint("auction-products-queue", e =>
+        {
+            e.ConfigureConsumer<AuctionProductsConsumer>(context);
         });
     });
 });

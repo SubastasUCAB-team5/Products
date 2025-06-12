@@ -296,6 +296,19 @@
           }
         }
       },
+      "ProductsMS.Commons/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "ProductsMS.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ProductsMS.Commons.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ProductsMS.Commons.dll": {}
+        }
+      },
       "ProductsMS.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -813,6 +826,11 @@
         "version.txt"
       ]
     },
+    "ProductsMS.Commons/1.0.0": {
+      "type": "project",
+      "path": "../ProductsMS.Commons/ProductsMS.Commons.csproj",
+      "msbuildProject": "../ProductsMS.Commons/ProductsMS.Commons.csproj"
+    },
     "ProductsMS.Domain/1.0.0": {
       "type": "project",
       "path": "../ProductsMS.Domain/ProductsMS.Domain.csproj",
@@ -823,6 +841,7 @@
     "net9.0": [
       "Azure.Core >= 1.46.2",
       "Microsoft.EntityFrameworkCore >= 9.0.5",
+      "ProductsMS.Commons >= 1.0.0",
       "ProductsMS.Domain >= 1.0.0"
     ]
   },
@@ -858,6 +877,9 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
+            "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Commons\\ProductsMS.Commons.csproj": {
+              "projectPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Commons\\ProductsMS.Commons.csproj"
+            },
             "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj": {
               "projectPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj"
             }

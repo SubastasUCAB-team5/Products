@@ -2057,6 +2057,7 @@
         "dependencies": {
           "Azure.Core": "1.46.2",
           "Microsoft.EntityFrameworkCore": "9.0.5",
+          "ProductsMS.Commons": "1.0.0",
           "ProductsMS.Domain": "1.0.0"
         },
         "compile": {

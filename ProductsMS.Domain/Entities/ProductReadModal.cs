@@ -15,7 +15,6 @@ public class ProductReadModel
     public List<string> Images { get; set; } = new List<string>();
     public ProductState State { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    
     [BsonRepresentation(BsonType.String)]
     public Guid UserId { get; set; }
 }

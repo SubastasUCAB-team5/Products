@@ -101,6 +101,9 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Commons\\ProductsMS.Commons.csproj": {
+                "projectPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Commons\\ProductsMS.Commons.csproj"
+              },
               "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj": {
                 "projectPath": "C:\\Users\\cesar\\Desktop\\Desarrollo\\Products\\ProductsMS.Domain\\ProductsMS.Domain.csproj"
               }
